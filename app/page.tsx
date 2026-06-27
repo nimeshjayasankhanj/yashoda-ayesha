@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function WeddingInvitation() {
   const weddingDate = new Date("2026-09-10T18:00:00");
@@ -35,6 +35,40 @@ export default function WeddingInvitation() {
   const [message, setMessage] = useState("");
   const [attendance, setAttendance] = useState("");
   const [errors, setErrors] = useState({ name: "", phone: "", attendance: "" });
+
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [showSplash, setShowSplash] = useState(true);
+
+  const handleEnter = () => {
+    const audio = audioRef.current;
+    setShowSplash(false);
+
+    if (!audio) return;
+    audio
+      .play()
+      .then(() => setIsPlaying(true))
+      .catch(() => setIsPlaying(false));
+  };
+
+  useEffect(() => {
+    document.body.style.overflow = showSplash ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [showSplash]);
+
+  const toggleAudio = () => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    if (isPlaying) {
+      audio.pause();
+      setIsPlaying(false);
+    } else {
+      audio.play().then(() => setIsPlaying(true)).catch(() => setIsPlaying(false));
+    }
+  };
 
   const handleRSVPSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -96,6 +130,49 @@ export default function WeddingInvitation() {
 
   return (
     <main className="min-h-screen bg-[#f2f4ec] text-[#3f2d2d]" >
+      <audio ref={audioRef} src="/jayamangala-gatha-pirith.mp3" loop />
+
+      {showSplash && (
+        <div className="fixed inset-0 z-[100] bg-[#4b5320] flex flex-col items-center justify-center px-6 text-center">
+          <p className="text-white/70 text-xs tracking-[4px] uppercase mb-4">
+            Wedding Invitation
+          </p>
+          <h1 className="text-white text-3xl font-serif tracking-[4px]">
+            Yashoda
+          </h1>
+          <div className="w-10 h-px bg-white/40 my-4" />
+          <h1 className="text-white text-3xl font-serif tracking-[4px]">
+            Ayesha
+          </h1>
+
+          <button
+            onClick={handleEnter}
+            className="mt-10 bg-white text-[#4b5320] px-8 py-3 rounded-full uppercase tracking-[3px] text-xs font-semibold shadow-lg"
+          >
+            Enter Invitation
+          </button>
+        </div>
+      )}
+
+      <button
+        onClick={toggleAudio}
+        aria-label={isPlaying ? "Pause music" : "Play music"}
+        className="fixed top-4 right-4 z-50 w-11 h-11 rounded-full bg-[#4b5320] text-white shadow-lg flex items-center justify-center"
+      >
+        {isPlaying ? (
+          // pause icon
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <rect x="3" y="2" width="3" height="12" />
+            <rect x="10" y="2" width="3" height="12" />
+          </svg>
+        ) : (
+          // play icon
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M3 2l11 6-11 6V2z" />
+          </svg>
+        )}
+      </button>
+
       {/* HERO */}
       <section className="max-w-md mx-auto px-4 pt-6">
         <div className="bg-white border-4 border-white shadow-lg p-4">
