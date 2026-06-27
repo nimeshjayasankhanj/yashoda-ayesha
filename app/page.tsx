@@ -100,27 +100,31 @@ export default function WeddingInvitation() {
             <Image alt="couple" src={"/img.png"} width={2000} height={2000} />
 
             <div className="text-center py-8">
-              <p className="italic text-gray-500">
+              <p className="font-serif text-2xl text-gray-500">
                 Wedding Invitation
               </p>
 
-              <h1 className="text-4xl tracking-[8px] mt-6 font-serif">
+              <h1 className="text-3xl tracking-[8px] mt-6 font-serif">
                 Yashoda
               </h1>
 
               <div className="w-12 h-px bg-gray-400 mx-auto my-4" />
 
-              <h1 className="text-4xl tracking-[8px] font-serif">
+              <h1 className="text-3xl tracking-[8px] font-serif">
                 Ayesha
               </h1>
 
               <div className="w-12 h-px bg-gray-400 mx-auto my-6" />
 
-              <p className="text-xs tracking-[3px] uppercase">
+              <p className="text-sm tracking-[3px] uppercase">
                 September 10, 2026
               </p>
 
-              <p className="text-xs mt-2 tracking-[3px] uppercase">
+              <p className="text-sm mt-2 tracking-[3px] uppercase">
+                Dutch Gate Hotel
+              </p>
+
+              <p className="text-sm mt-2 tracking-[3px] uppercase">
                 Aluthgama, Sri Lanka
               </p>
             </div>
@@ -129,7 +133,7 @@ export default function WeddingInvitation() {
       </section>
 
       {/* COUNTDOWN */}
-      <section className="bg-[#2f1818] mt-12 py-10">
+      <section className="bg-[#4b5320] mt-12 py-10">
         <div className="max-w-md mx-auto px-4">
           <p className="text-center text-white text-xs tracking-[4px] uppercase mb-6">
             Countdown To Our Big Day
@@ -144,7 +148,7 @@ export default function WeddingInvitation() {
             ].map((value, index) => (
               <div
                 key={index}
-                className="bg-[#4a2b2b] rounded-lg py-4 text-center text-white"
+                className="bg-[#8a9a5b] rounded-lg py-4 text-center text-white"
               >
                 <div className="text-2xl font-bold">
                   {String(value).padStart(2, "0")}
@@ -161,7 +165,7 @@ export default function WeddingInvitation() {
           Our Story
         </p>
 
-        <h2 className="text-center text-5xl font-serif mt-4">
+        <h2 className="text-center text-5xl font-serif mt-4" style={{ color: "#4b5320" }}>
           Our Story
         </h2>
 
@@ -192,7 +196,7 @@ export default function WeddingInvitation() {
           Our Big Day
         </p>
 
-        <h2 className="text-center text-5xl font-serif mt-4 mb-12">
+        <h2 className="text-center text-5xl font-serif mt-4 mb-12" style={{ color: "#4b5320" }}>
           Wedding Timeline
         </h2>
 
@@ -258,7 +262,7 @@ export default function WeddingInvitation() {
               Join Us
             </p>
 
-            <h2 className="font-serif text-4xl mt-4">
+            <h2 className="font-serif text-4xl mt-4" style={{ color: "#4b5320" }}>
               Wedding Ceremony
             </h2>
 
@@ -301,7 +305,7 @@ export default function WeddingInvitation() {
           We Are Waiting
         </p>
 
-        <h2 className="font-serif text-center text-5xl mt-4">
+        <h2 className="font-serif text-center text-5xl mt-4" style={{ color: "#4b5320" }}>
           Please Confirm
         </h2>
 
