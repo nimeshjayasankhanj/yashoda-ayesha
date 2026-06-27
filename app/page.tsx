@@ -33,18 +33,20 @@ export default function WeddingInvitation() {
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
-  const [errors, setErrors] = useState({ name: "", phone: "" });
+  const [attendance, setAttendance] = useState("");
+  const [errors, setErrors] = useState({ name: "", phone: "", attendance: "" });
 
   const handleRSVPSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    const newErrors = { name: "", phone: "" };
+    const newErrors = { name: "", phone: "", attendance: "" };
     if (!name.trim()) newErrors.name = "Name is required";
     if (!phone.trim()) newErrors.phone = "Phone number is required";
+    if (!attendance) newErrors.attendance = "Please select an option";
 
     setErrors(newErrors);
 
-    if (newErrors.name || newErrors.phone) {
+    if (newErrors.name || newErrors.phone || newErrors.attendance) {
       return;
     }
 
@@ -53,6 +55,7 @@ export default function WeddingInvitation() {
       `RSVP - Yashoda & Ayesha's Wedding`,
       `Name: ${name.trim()}`,
       `Phone: ${phone.trim()}`,
+      `Attendance: ${attendance}`,
       message.trim() ? `Message: ${message.trim()}` : "",
     ]
       .filter(Boolean)
@@ -92,7 +95,7 @@ export default function WeddingInvitation() {
   };
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#f8eef0] via-[#f6e9ec] to-[#efd8df] text-[#3f2d2d]">
+    <main className="min-h-screen bg-[#f2f4ec] text-[#3f2d2d]" >
       {/* HERO */}
       <section className="max-w-md mx-auto px-4 pt-6">
         <div className="bg-white border-4 border-white shadow-lg p-4">
@@ -237,7 +240,7 @@ export default function WeddingInvitation() {
             </h2>
 
             <div className="mt-8 space-y-3">
-              <p className="font-semibold">
+              <p className="font-semibold" style={{ color: "#4b5320" }}>
                 Dutch Gate Hotel
               </p>
 
@@ -254,7 +257,7 @@ export default function WeddingInvitation() {
                   "https://www.google.com/maps/search/?api=1&query=6.4297767,80.0023093"
                 )
               }
-              className="w-full mt-8 bg-[#5a3737] text-white py-3 rounded-lg"
+              className="w-full mt-8 bg-[#4b5320] text-white py-3 rounded-lg"
             >
               View Location
             </button>
@@ -279,7 +282,10 @@ export default function WeddingInvitation() {
           Please Confirm
         </h2>
 
-        <form onSubmit={handleRSVPSubmit} className="mt-12 space-y-6">
+        <form
+          onSubmit={handleRSVPSubmit}
+          className="mt-12 space-y-6  rounded-2xl p-6"
+        >
           <div>
             <input
               type="text"
@@ -308,17 +314,45 @@ export default function WeddingInvitation() {
             )}
           </div>
 
-          <textarea
-            rows={3}
-            placeholder="Message For The Couple"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            className="w-full bg-transparent border-b border-gray-300 py-3 outline-none resize-none"
-          />
+          <div>
+            <p className="text-sm">
+              Will you save the date and celebrate with us?
+            </p>
 
+            <div className="mt-4 space-y-3">
+              {[
+                "Yes, we'll be there.",
+                "Unfortunately, we can't make it.",
+              ].map((option) => (
+                <label
+                  key={option}
+                  className={`flex items-center gap-3 w-full text-sm py-3 px-4 rounded-lg border cursor-pointer transition-colors ${attendance === option
+                    ? "border-[#4b5320] bg-[#4b5320]/5"
+                    : "border-gray-300"
+                    }`}
+                >
+                  <input
+                    type="radio"
+                    name="attendance"
+                    value={option}
+                    checked={attendance === option}
+                    onChange={() => setAttendance(option)}
+                    className="w-4 h-4 accent-[#4b5320]"
+                  />
+                  {option}
+                </label>
+              ))}
+            </div>
+
+            {errors.attendance && (
+              <p className="text-red-500 text-xs mt-2">
+                {errors.attendance}
+              </p>
+            )}
+          </div>
           <button
             type="submit"
-            className="w-full bg-[#c89c9c] hover:bg-[#b98989] text-white py-4 uppercase tracking-wider"
+            className="w-full bg-[#4b5320] text-white py-4 uppercase tracking-wider"
           >
             Confirm Via WhatsApp
           </button>
