@@ -1,9 +1,10 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export default function WeddingInvitation() {
-  const weddingDate = new Date("2026-08-10T18:00:00");
+  const weddingDate = new Date("2026-09-10T18:00:00");
 
   const [countdown, setCountdown] = useState({
     days: 0,
@@ -29,17 +30,74 @@ export default function WeddingInvitation() {
     return () => clearInterval(timer);
   }, []);
 
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
+  const [errors, setErrors] = useState({ name: "", phone: "" });
+
+  const handleRSVPSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const newErrors = { name: "", phone: "" };
+    if (!name.trim()) newErrors.name = "Name is required";
+    if (!phone.trim()) newErrors.phone = "Phone number is required";
+
+    setErrors(newErrors);
+
+    if (newErrors.name || newErrors.phone) {
+      return;
+    }
+
+    const whatsappNumber = "94702622626";
+    const text = [
+      `RSVP - Yashoda & Ayesha's Wedding`,
+      `Name: ${name.trim()}`,
+      `Phone: ${phone.trim()}`,
+      message.trim() ? `Message: ${message.trim()}` : "",
+    ]
+      .filter(Boolean)
+      .join("\n");
+
+    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
+      text
+    )}`;
+
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+
+  const handleAddToCalendar = () => {
+    const formatGCalDate = (date: Date) =>
+      date
+        .toISOString()
+        .replace(/[-:]/g, "")
+        .replace(/\.\d{3}Z$/, "Z");
+
+    const eventStart = new Date("2026-09-10T10:00:00");
+    const eventEnd = new Date("2026-09-10T22:00:00");
+
+    const params = new URLSearchParams({
+      action: "TEMPLATE",
+      text: "Yashoda & Ayesha's Wedding",
+      dates: `${formatGCalDate(eventStart)}/${formatGCalDate(eventEnd)}`,
+      details:
+        "Join us as we celebrate our wedding! Poruwa Ceremony, lunch, and celebrations to follow.",
+      location: "Dutch Gate Hotel, Aluthgama, Sri Lanka",
+    });
+
+    window.open(
+      `https://calendar.google.com/calendar/render?${params.toString()}`,
+      "_blank",
+      "noopener,noreferrer"
+    );
+  };
+
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#f8eef0] via-[#f6e9ec] to-[#efd8df] text-[#3f2d2d]">
       {/* HERO */}
       <section className="max-w-md mx-auto px-4 pt-6">
         <div className="bg-white border-4 border-white shadow-lg p-4">
           <div className="border border-[#ead7db] p-4">
-            <img
-              src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1000&q=80"
-              alt="couple"
-              className="w-full h-[280px] object-cover rounded"
-            />
+            <Image alt="couple" src={"/img.png"} width={2000} height={2000} />
 
             <div className="text-center py-8">
               <p className="italic text-gray-500">
@@ -59,11 +117,11 @@ export default function WeddingInvitation() {
               <div className="w-12 h-px bg-gray-400 mx-auto my-6" />
 
               <p className="text-xs tracking-[3px] uppercase">
-                August 10, 2026
+                September 10, 2026
               </p>
 
               <p className="text-xs mt-2 tracking-[3px] uppercase">
-                Colombo, Sri Lanka
+                Aluthgama, Sri Lanka
               </p>
             </div>
           </div>
@@ -141,24 +199,24 @@ export default function WeddingInvitation() {
         <div className="space-y-5">
           {[
             {
-              time: "04:00 PM",
-              title: "The Ceremony",
-              desc: "Exchange vows and celebrate our union.",
+              time: "09:40 AM",
+              title: "Poruwa Ceremony",
+              desc: "We will be performing the traditional Sinhala Poruwa Ceremony.",
             },
             {
-              time: "05:30 PM",
-              title: "Cocktail Hour",
-              desc: "Refreshments and photographs.",
-            },
-            {
-              time: "07:00 PM",
-              title: "Grand Dinner",
-              desc: "Dinner and wedding speeches.",
+              time: "12:15 PM",
+              title: "Grand Lunch",
+              desc: "",
             },
             {
               time: "09:00 PM",
               title: "The Party",
               desc: "Music, dancing and celebration.",
+            },
+            {
+              time: "04:20 PM",
+              title: "Grand Exit",
+              desc: "",
             },
           ].map((item) => (
             <div
@@ -206,21 +264,33 @@ export default function WeddingInvitation() {
 
             <div className="mt-8 space-y-3">
               <p className="font-semibold">
-                Grand Colombo Hotel
+                Dutch Gate Hotel
               </p>
 
-              <p>August 10, 2026</p>
+              <p>September 10, 2026</p>
 
-              <p>6:00 PM Onwards</p>
+              <p>10:00 AM Onwards</p>
 
-              <p>Colombo, Sri Lanka</p>
+              <p>Aluthgama, Sri Lanka</p>
             </div>
 
-            <button className="w-full mt-8 bg-[#5a3737] text-white py-3 rounded-lg">
+            <button
+              onClick={() =>
+                window.open(
+                  "https://maps.app.goo.gl/bYW2wF3QhNqWVaTK7",
+                  "_blank",
+                  "noopener,noreferrer"
+                )
+              }
+              className="w-full mt-8 bg-[#5a3737] text-white py-3 rounded-lg"
+            >
               View Location
             </button>
 
-            <button className="w-full mt-3 border border-gray-300 py-3 rounded-lg">
+            <button
+              onClick={handleAddToCalendar}
+              className="w-full mt-3 border border-gray-300 py-3 rounded-lg"
+            >
               Add To Calendar
             </button>
           </div>
@@ -237,22 +307,40 @@ export default function WeddingInvitation() {
           Please Confirm
         </h2>
 
-        <form className="mt-12 space-y-6">
-          <input
-            type="text"
-            placeholder="Full Name"
-            className="w-full bg-transparent border-b border-gray-300 py-3 outline-none"
-          />
+        <form onSubmit={handleRSVPSubmit} className="mt-12 space-y-6">
+          <div>
+            <input
+              type="text"
+              placeholder="Full Name *"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              className={`w-full bg-transparent border-b py-3 outline-none ${errors.name ? "border-red-500" : "border-gray-300"
+                }`}
+            />
+            {errors.name && (
+              <p className="text-red-500 text-xs mt-1">{errors.name}</p>
+            )}
+          </div>
 
-          <input
-            type="text"
-            placeholder="Phone Number"
-            className="w-full bg-transparent border-b border-gray-300 py-3 outline-none"
-          />
+          <div>
+            <input
+              type="tel"
+              placeholder="Phone Number *"
+              value={phone}
+              onChange={(e) => setPhone(e.target.value)}
+              className={`w-full bg-transparent border-b py-3 outline-none ${errors.phone ? "border-red-500" : "border-gray-300"
+                }`}
+            />
+            {errors.phone && (
+              <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
+            )}
+          </div>
 
           <textarea
             rows={3}
             placeholder="Message For The Couple"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
             className="w-full bg-transparent border-b border-gray-300 py-3 outline-none resize-none"
           />
 
