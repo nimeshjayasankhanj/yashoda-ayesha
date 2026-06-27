@@ -48,7 +48,7 @@ export default function WeddingInvitation() {
       return;
     }
 
-    const whatsappNumber = "94769846039";
+    const whatsappNumber = "94702622626";
     const text = [
       `RSVP - Yashoda & Ayesha's Wedding`,
       `Name: ${name.trim()}`,
@@ -100,17 +100,17 @@ export default function WeddingInvitation() {
             <Image alt="couple" src={"/img.png"} width={2000} height={2000} />
 
             <div className="text-center py-8">
-              <p className="font-serif text-2xl text-gray-500">
+              <p className="font-serif text-3xl text-gray-500">
                 Wedding Invitation
               </p>
 
-              <h1 className="text-3xl tracking-[8px] mt-6 font-serif">
+              <h1 className="text-2xl tracking-[8px] mt-6 font-serif">
                 Yashoda
               </h1>
 
               <div className="w-12 h-px bg-gray-400 mx-auto my-4" />
 
-              <h1 className="text-3xl tracking-[8px] font-serif">
+              <h1 className="text-2xl tracking-[8px] font-serif">
                 Ayesha
               </h1>
 
@@ -120,13 +120,6 @@ export default function WeddingInvitation() {
                 September 10, 2026
               </p>
 
-              <p className="text-sm mt-2 tracking-[3px] uppercase">
-                Dutch Gate Hotel
-              </p>
-
-              <p className="text-sm mt-2 tracking-[3px] uppercase">
-                Aluthgama, Sri Lanka
-              </p>
             </div>
           </div>
         </div>
@@ -161,41 +154,21 @@ export default function WeddingInvitation() {
 
       {/* OUR STORY */}
       <section className="max-w-md mx-auto px-6 py-20">
-        <p className="text-center text-xs tracking-[5px] uppercase text-gray-500">
-          Our Story
-        </p>
-
         <h2 className="text-center text-5xl font-serif mt-4" style={{ color: "#4b5320" }}>
           Our Story
         </h2>
 
         <p className="text-center leading-8 text-gray-700 mt-10">
-          Together with our families, we invite you
-          to celebrate our joyful union and share
-          this unforgettable moment with us.
+          "A few years ago, our journey began with a simple hello. Through laughter, memories, and countless cherished moments, our love grew stronger each day, leading us to this beautiful moment , where two hearts become one and a new chapter begins....."
         </p>
 
-        <div className="grid grid-cols-2 gap-4 mt-12">
-          <img
-            src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=800&q=80"
-            alt=""
-            className="rounded-[30px] h-52 object-cover shadow-lg"
-          />
-
-          <img
-            src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80"
-            alt=""
-            className="rounded-[30px] h-52 object-cover shadow-lg"
-          />
+        <div className="grid grid-cols-1 gap-4 mt-12">
+          <Image alt="couple" src={"/card-1.jpg"} width={3000} height={3000} className="rounded-[30px] h-52 object-cover shadow-lg" />
         </div>
       </section>
 
       {/* TIMELINE */}
       <section className="max-w-md mx-auto px-4 py-12">
-        <p className="text-center uppercase tracking-[5px] text-xs text-gray-500">
-          Our Big Day
-        </p>
-
         <h2 className="text-center text-5xl font-serif mt-4 mb-12" style={{ color: "#4b5320" }}>
           Wedding Timeline
         </h2>
@@ -205,22 +178,22 @@ export default function WeddingInvitation() {
             {
               time: "09:40 AM",
               title: "Poruwa Ceremony",
-              desc: "We will be performing the traditional Sinhala Poruwa Ceremony.",
+              desc: "We would be honored by your presence as we exchange our vows upon the Poruwa, embracing the rich heritage and blessings of this cherished tradition.",
             },
             {
               time: "12:15 PM",
-              title: "Grand Lunch",
-              desc: "",
+              title: "Lunch",
+              desc: "Your presence is the greatest gift of all. We invite you to join us for lunch and celebrate the beginning of our new journey together.",
             },
             {
-              time: "09:00 PM",
-              title: "The Party",
-              desc: "Music, dancing and celebration.",
+              time: "02:00 PM",
+              title: "The Dance Floor",
+              desc: "Join us on the dance floor as we celebrate love, laughter, and new beginnings. Let's dance, rejoice, and make beautiful memories together!",
             },
             {
               time: "04:20 PM",
               title: "Grand Exit",
-              desc: "",
+              desc: "Join us for as we conclude our beautiful celebration, sharing laughter, love, and unforgettable memories together.",
             },
           ].map((item) => (
             <div
@@ -246,11 +219,12 @@ export default function WeddingInvitation() {
       {/* EVENT IMAGE */}
       <section className="max-w-md mx-auto px-4 py-8">
         <div className="overflow-hidden rounded-[30px] shadow-lg">
-          <img
+          {/* <img
             src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?auto=format&fit=crop&w=1200&q=80"
             alt=""
             className="w-full h-64 object-cover"
-          />
+          /> */}
+          <Image alt="couple" src={"/img-2.png"} width={3000} height={3000} className="w-full h-64 object-cover" />
         </div>
       </section>
 
@@ -258,10 +232,6 @@ export default function WeddingInvitation() {
       <section className="max-w-md mx-auto px-4">
         <div className="bg-white border shadow-md p-8">
           <div className="text-center">
-            <p className="uppercase tracking-[4px] text-xs text-gray-500">
-              Join Us
-            </p>
-
             <h2 className="font-serif text-4xl mt-4" style={{ color: "#4b5320" }}>
               Wedding Ceremony
             </h2>
@@ -356,7 +326,7 @@ export default function WeddingInvitation() {
       </section>
 
       {/* FOOTER */}
-      <footer className="bg-[#2f1818] py-12">
+      <footer className="bg-[#4b5320] py-12">
         <h2 className="text-center text-white text-4xl font-serif">
           Yashoda & Ayesha
         </h2>
