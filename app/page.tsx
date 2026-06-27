@@ -48,7 +48,7 @@ export default function WeddingInvitation() {
       return;
     }
 
-    const whatsappNumber = "94702622626";
+    const whatsappNumber = "94769846039";
     const text = [
       `RSVP - Yashoda & Ayesha's Wedding`,
       `Name: ${name.trim()}`,
@@ -276,10 +276,8 @@ export default function WeddingInvitation() {
 
             <button
               onClick={() =>
-                window.open(
-                  "https://maps.app.goo.gl/bYW2wF3QhNqWVaTK7",
-                  "_blank",
-                  "noopener,noreferrer"
+                window.location.assign(
+                  "https://www.google.com/maps/search/?api=1&query=6.4297767,80.0023093"
                 )
               }
               className="w-full mt-8 bg-[#5a3737] text-white py-3 rounded-lg"
